@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<p th:text="'hello ' + ${name}"> hello!</p>
+<p th:text="'modelCount ' + ${count}">Model</p>
+
+<tr th:each="model : ${modelList}">
+    <td th:text="${model.id}"></td>
+    <td th:text="${model.name}"></td>
+</tr>
+
+</body>
+</html>
