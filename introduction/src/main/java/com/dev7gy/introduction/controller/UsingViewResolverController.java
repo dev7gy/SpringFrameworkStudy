@@ -44,7 +44,7 @@ public class UsingViewResolverController {
         }
 
         model.addAttribute("name", name);
-        model.addAttribute("count", service.countByKey(name));
+        model.addAttribute("count", service.countByName(name));
         model.addAttribute("modelList", service.selectAll());
 
         return "mvc";

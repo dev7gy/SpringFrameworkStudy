@@ -1,4 +1,4 @@
-package com.dev7gy.introduction.Repository;
+package com.dev7gy.introduction.repository;
 
 import com.dev7gy.introduction.model.Model;
 import org.springframework.data.jpa.repository.JpaRepository;

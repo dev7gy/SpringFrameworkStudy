@@ -10,3 +10,6 @@
  - packaging: jar
  - java: 11
  - dependencies: thymeleaf, spring web
+
+## MVC
+ view + Controller를 합쳐 있는 코드 - JSP
