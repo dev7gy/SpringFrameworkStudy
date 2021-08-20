@@ -1,6 +1,5 @@
 package com.dev7gy.introduction.controller;
 
-import com.dev7gy.introduction.model.Model;
 import com.dev7gy.introduction.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,3 +20,12 @@ public class ModelController {
         this.modelService = modelService;
     }
 }
+/**
+ * 중요! 스프링 빈을 등록하는 2가지 방법
+ * 컴포넌트 스캔과 자동 의존관계 설정
+ * -> @Component 어노테이션이 있으면 스프링 빈을 자동으로 등록된다. - @Controller, @Service, @Repository도 @Component의 한 종류
+ *  - 스프링은 스프링 컨테이너에 스프링 빈을 등록할 때, 기본으로 싱글톤으로 등록한다.
+ * 
+ * 자바 코드로 직접 스프링 빈 등록하기
+ * 
+ */

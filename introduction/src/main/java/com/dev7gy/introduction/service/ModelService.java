@@ -3,10 +3,13 @@ package com.dev7gy.introduction.service;
 import com.dev7gy.introduction.model.Model;
 import com.dev7gy.introduction.repository.MemoryModelRepository;
 import com.dev7gy.introduction.repository.ModelRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ModelService {
     /*
     private final ModelRepository repository = new MemoryModelRepository();
@@ -14,6 +17,7 @@ public class ModelService {
      */
     private final ModelRepository repository;
 
+    @Autowired
     public ModelService(ModelRepository modelRepository) {
         this.repository = modelRepository;
     }

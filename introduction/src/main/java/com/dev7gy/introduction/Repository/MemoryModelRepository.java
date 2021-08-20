@@ -1,9 +1,11 @@
 package com.dev7gy.introduction.repository;
 
 import com.dev7gy.introduction.model.Model;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryModelRepository implements ModelRepository {
     private static Map<Long, Model> store = new HashMap<>();
     private static long sequence = 0L;
