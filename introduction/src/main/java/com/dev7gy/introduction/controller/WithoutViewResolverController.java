@@ -1,6 +1,6 @@
 package com.dev7gy.introduction.controller;
 
-import com.dev7gy.introduction.model.Model;
+import com.dev7gy.introduction.model.SpringModel;
 import com.dev7gy.introduction.service.DefaultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class WithoutViewResolverController {
 
     @GetMapping("model")
     @ResponseBody
-    public Model responseBody(@RequestParam(required = false, value = "name") String name) {
+    public SpringModel responseBody(@RequestParam(required = false, value = "name") String name) {
 
         return service.addModel(name);
         /** viewResolver 대신 HttpMessageConverter가 동작

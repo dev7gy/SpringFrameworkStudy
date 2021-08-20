@@ -1,12 +1,9 @@
 package com.dev7gy.introduction.service;
 
-import com.dev7gy.introduction.model.Model;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,7 +24,7 @@ public class DefaultServiceTest {
 
         // Then
         assertEquals(defaultService.countByName(modelName), 1);
-        //List<Model> modelList = defaultService.selectAll();
+        //List<SpringModel> modelList = defaultService.selectAll();
         //assertEquals(modelList.)
     }
 }

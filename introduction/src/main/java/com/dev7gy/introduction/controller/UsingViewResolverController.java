@@ -22,7 +22,7 @@ public class UsingViewResolverController {
     /**
      * 동작 방식
      * 웹브라우저 -> localhost:8080/hello -> 내장 톰캣서버 -> HelloController -> 
-     *  public String hello(Model model) -> viewResolver -> templates/hello.html -> 웹 브라우저 
+     *  public String hello(SpringModel model) -> viewResolver -> templates/hello.html -> 웹 브라우저
      * 
      * @param model
      * @return
