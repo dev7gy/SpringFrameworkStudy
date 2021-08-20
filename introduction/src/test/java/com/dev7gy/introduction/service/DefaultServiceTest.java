@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Transactional
 public class DefaultServiceTest {
     @Autowired  DefaultService defaultService;
-    //  @Autowired PsqlModelRepository psqlModelRepository;
+    //  @Autowired JdbcSpringModelRepository psqlModelRepository;
 
     @Test
     public void Model추가() throws Exception {
