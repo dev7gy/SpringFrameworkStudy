@@ -1,6 +1,7 @@
 package com.dev7gy.introduction.configuration;
 
 import com.dev7gy.introduction.repository.JdbcSpringModelRepository;
+import com.dev7gy.introduction.repository.JdbcTemplateSpringModelRepository;
 import com.dev7gy.introduction.repository.MemorySpringModelRepository;
 import com.dev7gy.introduction.repository.SpringModelRepository;
 import com.dev7gy.introduction.service.SpringModelService;
@@ -26,7 +27,8 @@ public class SpringModelConfig {
 
     @Bean
     public SpringModelRepository springModelRepository() {
-        // return new MemorySpringModelRepository();
-        return new JdbcSpringModelRepository(dataSource);
+        // return new MemorySpringModelRepository(); - memory DB
+        // return new JdbcSpringModelRepository(dataSource); - jdbc를 직접 사용
+        return new JdbcTemplateSpringModelRepository(dataSource);
     }
 }
