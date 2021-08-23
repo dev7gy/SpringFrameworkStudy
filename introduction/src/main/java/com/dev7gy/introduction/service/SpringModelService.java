@@ -3,11 +3,13 @@ package com.dev7gy.introduction.service;
 import com.dev7gy.introduction.model.SpringModel;
 import com.dev7gy.introduction.repository.SpringModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-
+// !중요 jpa 사용하면서 사용 - jpa를 통한 모든 데이터 변경은 트랜잭션 안에서 실행해야 한다.
+@Transactional
 public class SpringModelService {
     /*
     private final SpringModelRepository repository = new MemorySpringModelRepository();
