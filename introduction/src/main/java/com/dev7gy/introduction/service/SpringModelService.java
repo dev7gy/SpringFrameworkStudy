@@ -21,12 +21,23 @@ public class SpringModelService {
     public SpringModelService(SpringModelRepository springModelRepository) {
         this.repository = springModelRepository;
     }
-    
+
+    private void printTimeMessage(long startTime, String functionName) {
+        long finish = System.currentTimeMillis();
+        long timeMs = finish - startTime;
+        System.out.println(functionName + " " + timeMs + "ms");
+    }
+
     // 메소드
     public Long join(SpringModel springModel) {
-        validateDuplicateSpringModel(springModel);
-        repository.save(springModel);
-        return springModel.getId();
+        long start = System.currentTimeMillis();
+        try {
+            validateDuplicateSpringModel(springModel);
+            repository.save(springModel);
+            return springModel.getId();
+        } finally {
+            printTimeMessage(start,"join");
+        }
     }
 
     private void validateDuplicateSpringModel(SpringModel springModel) {
@@ -37,7 +48,13 @@ public class SpringModelService {
     }
 
     public List<SpringModel> findSpringModels() {
-        return repository.findAll();
+        long start = System.currentTimeMillis();
+        try {
+            return repository.findAll();
+        } finally {
+            printTimeMessage(start, "find");
+        }
+
     }
 
     public Optional<SpringModel> findById(Long springModelId) {
