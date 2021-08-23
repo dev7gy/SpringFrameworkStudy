@@ -22,6 +22,7 @@ public class SpringModelService {
     
     // 메소드
     public Long join(SpringModel springModel) {
+        validateDuplicateSpringModel(springModel);
         repository.save(springModel);
         return springModel.getId();
     }

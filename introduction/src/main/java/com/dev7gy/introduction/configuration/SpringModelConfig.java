@@ -27,8 +27,8 @@ public class SpringModelConfig {
 
     @Bean
     public SpringModelRepository springModelRepository() {
-        // return new MemorySpringModelRepository(); - memory DB
-        // return new JdbcSpringModelRepository(dataSource); - jdbc를 직접 사용
-        return new JdbcTemplateSpringModelRepository(dataSource);
+        // return new MemorySpringModelRepository(); // memory DB
+        return new JdbcSpringModelRepository(dataSource); // jdbc를 직접 사용
+        // return new JdbcTemplateSpringModelRepository(dataSource);
     }
 }
