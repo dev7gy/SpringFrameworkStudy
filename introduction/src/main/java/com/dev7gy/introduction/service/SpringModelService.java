@@ -30,14 +30,9 @@ public class SpringModelService {
 
     // 메소드
     public Long join(SpringModel springModel) {
-        long start = System.currentTimeMillis();
-        try {
-            validateDuplicateSpringModel(springModel);
-            repository.save(springModel);
-            return springModel.getId();
-        } finally {
-            printTimeMessage(start,"join");
-        }
+        validateDuplicateSpringModel(springModel);
+        repository.save(springModel);
+        return springModel.getId();
     }
 
     private void validateDuplicateSpringModel(SpringModel springModel) {
@@ -48,13 +43,7 @@ public class SpringModelService {
     }
 
     public List<SpringModel> findSpringModels() {
-        long start = System.currentTimeMillis();
-        try {
-            return repository.findAll();
-        } finally {
-            printTimeMessage(start, "find");
-        }
-
+        return repository.findAll();
     }
 
     public Optional<SpringModel> findById(Long springModelId) {
