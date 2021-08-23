@@ -25,6 +25,8 @@ public class SpringModelController {
     @Autowired
     public SpringModelController(SpringModelService springModelService) {
         this.springModelService = springModelService;
+        // AOP proxy 기술 확인용 코드
+        System.out.println("springModelService = " + springModelService.getClass());
     }
 
     @GetMapping(value = "/springModels/new")

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class TimeTraceAop {
-    @Around("execution(* com.dev7gy.introduction..*(..))")
+    @Around("execution(* com.dev7gy.introduction.service..*(..))")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         System.out.println("START: " + joinPoint.toString());
@@ -22,3 +22,7 @@ public class TimeTraceAop {
         }
     }
 }
+/*
+AOP가 있으면 (proxy)가짜 개체를 만들어낸다.
+스프링 빈을 등록할 때 가짜 빈을 앞에 세운다.
+ */
