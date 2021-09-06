@@ -2,6 +2,8 @@ package com.dev7gy.core.member.example;
 
 import com.dev7gy.core.member.Grade;
 import com.dev7gy.core.member.Member;
+import com.dev7gy.core.member.repository.MemberRepository;
+import com.dev7gy.core.member.repository.MemoryMemberRepository;
 import com.dev7gy.core.member.service.MemberService;
 import com.dev7gy.core.member.service.MemberServiceImpl;
 
@@ -12,7 +14,8 @@ import com.dev7gy.core.member.service.MemberServiceImpl;
  */
 public class MemberApp {
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
+        MemberRepository memberRepository = new MemoryMemberRepository();
+        MemberService memberService = new MemberServiceImpl(memberRepository);
         Member member = new Member(1L, "memberA", Grade.VIP);
         memberService.join(member);
 
