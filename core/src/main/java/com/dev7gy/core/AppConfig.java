@@ -1,6 +1,8 @@
 package com.dev7gy.core;
 
+import com.dev7gy.core.discount.DiscountPolicy;
 import com.dev7gy.core.discount.FixDiscountPolicy;
+import com.dev7gy.core.member.repository.MemberRepository;
 import com.dev7gy.core.member.repository.MemoryMemberRepository;
 import com.dev7gy.core.member.service.MemberService;
 import com.dev7gy.core.member.service.MemberServiceImpl;
@@ -15,10 +17,29 @@ import com.dev7gy.core.order.example.OrderServiceImpl;
  * - 생성자를 통해서 연결시켜준다.
  */
 public class AppConfig {
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+    public DiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
+        // return new RateDiscountPolicy();
+        /**
+         * AppConfig 영역에서만 상황에 맞게 조합하면 된다.
+         */
+    }
+
+
     public MemberService memberService() {
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
     }
     public OrderService orderService() {
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 }
+
+/**
+ * 기억해야 할 개념
+ * IoC(Inversion of Control)
+ * DI(Dependency Injection)
+ */

@@ -21,7 +21,7 @@ public class RateDiscountPolicyTest {
     }
 
     @Test
-    @DisplayName("VIP는 10% 할인 적용 필요")
+    @DisplayName("VIP는 10% 할인 적용 필요없음")
     void basicDicount() {
         //given
         Member member = new Member(2L, "memberBasic", Grade.BASIC);
