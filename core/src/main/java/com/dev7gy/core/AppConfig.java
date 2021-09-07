@@ -6,11 +6,10 @@ import com.dev7gy.core.member.repository.MemberRepository;
 import com.dev7gy.core.member.repository.MemoryMemberRepository;
 import com.dev7gy.core.member.service.MemberService;
 import com.dev7gy.core.member.service.MemberServiceImpl;
-import com.dev7gy.core.order.example.OrderService;
-import com.dev7gy.core.order.example.OrderServiceImpl;
+import com.dev7gy.core.order.service.OrderService;
+import com.dev7gy.core.order.service.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 /**
  * 구현 클래스들의 객체를 생성하고 연결시켜주는 기능을 할 클래스 -> 스프링에서 IoC 컨테이너(DI 컨테이너)에 해당된다.
@@ -48,12 +47,12 @@ public class AppConfig {
          */
     }
 
-    @Bean(name="memberService_changedName")
+    @Bean(name="memberService")
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
     @Bean
-    public OrderService orderService_changed() {
+    public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 }

@@ -1,13 +1,13 @@
-package com.dev7gy.core.order.example;
+package com.dev7gy.core.order.service;
 
 import com.dev7gy.core.discount.DiscountPolicy;
-import com.dev7gy.core.discount.FixDiscountPolicy;
-import com.dev7gy.core.discount.RateDiscountPolicy;
 import com.dev7gy.core.member.Member;
 import com.dev7gy.core.member.repository.MemberRepository;
-import com.dev7gy.core.member.repository.MemoryMemberRepository;
 import com.dev7gy.core.order.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
     /**
      * 메모리 회원 리포지토리와, 고정 금액 할인 정책을 구현체로 생성한다.
@@ -26,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

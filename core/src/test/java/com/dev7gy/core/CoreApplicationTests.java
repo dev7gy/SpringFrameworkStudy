@@ -24,6 +24,7 @@ class CoreApplicationTests {
 	}
 
 	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+	// AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
 	@Test
 	@DisplayName("모든 Bean 출력하기")
 	void findAllBean() {
@@ -62,7 +63,7 @@ class CoreApplicationTests {
 	@Test
 	@DisplayName("빈 이름으로 조회")
 	void findBeanByName() {
-		MemberService memberService = ac.getBean("memberService_changedName",
+		MemberService memberService = ac.getBean("memberService",
 				MemberService.class);
 		assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
 	}
@@ -75,7 +76,7 @@ class CoreApplicationTests {
 	@Test
 	@DisplayName("구체 타입으로 조회")
 	void findBeanByName2() {
-		MemberServiceImpl memberService = ac.getBean("memberService_changedName",
+		MemberServiceImpl memberService = ac.getBean("memberService",
 				MemberServiceImpl.class);
 		assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
 	}

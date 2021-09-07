@@ -27,7 +27,7 @@ public class MemberServiceTest {
          */
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(AppConfig.class);
-        memberService = applicationContext.getBean("memberService_changedName", MemberService.class);
+        memberService = applicationContext.getBean("memberService", MemberService.class);
 
     }
     @Test

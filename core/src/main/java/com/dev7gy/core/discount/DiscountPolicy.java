@@ -1,6 +1,8 @@
 package com.dev7gy.core.discount;
 
 import com.dev7gy.core.member.Member;
+import org.springframework.stereotype.Component;
+
 
 public interface DiscountPolicy {
     /**
