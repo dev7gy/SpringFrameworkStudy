@@ -19,9 +19,19 @@ import org.springframework.stereotype.Component;
  * - 실제 동작에 필요한 구현 객체를 생성한다.
  * - 생성자를 통해서 연결시켜준다.
  */
-@Configuration
+@Configuration // @Configuraion은 싱글톤을 보장
 public class AppConfig {
-    @Bean
+    /**
+     *
+     * memberRepository() 함수를 3번 호출하면서 new가 3번있는데 어떻게 싱글톤을 유지할 수 있을까.
+     * < @Configuration에 의해 진행될 CGLIB 내부 동작을 추측 >
+     * Name = appConfigObject
+     * = com.dev7gy.core.AppConfig$$EnhancerBySpringCGLIB$$
+     * AppConfig는 CGLIB 기술을 사용해서 바이트 코드를 조작한다. 결국 실제 인스턴스가 아니라
+     * CGLIB를 통해 만들어진 클래스가 싱글톤으로 연결된다.
+     * -> 결국 내부적으로는 이미 스프링 컨테이너에 만들어진 싱글톤 빈이면 만들지 않는 것이다.
+     */
+    @Bean // @Bean은 싱글톤을 보장하지 않음.
     public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
