@@ -3,7 +3,6 @@ package com.dev7gy.core;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.stereotype.Component;
 
 @Configuration
 /**
