@@ -22,10 +22,9 @@ public class JpaMain {
         // begin()을 통해 데이터베이스 트랜잭션을 시작한다.
         entityTransaction.begin();
         try {
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("helloMember");
-            entityManager.persist(member);
+            Member findMember = entityManager.find(Member.class, 1L);
+            System.out.println("findMember ID = " + findMember.getId());
+            System.out.println("findMember Name= " + findMember.getName());
             // 정상적일 경우 commit
             entityTransaction.commit();
         } catch (Exception e) {
