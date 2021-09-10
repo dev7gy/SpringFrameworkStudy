@@ -4,12 +4,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
         /**
-         * resources/META-INF/persistence.xml 파일에서 <persistence-unit name="hello"> 유닛명이 hello기 때문에 아래 코드도 hello
          * EntityManagerFactory 웹 서버 올라갈 때 하나만 생성된다. 애플리케이션 전체에서 공유
+         * resources/META-INF/persistence.xml 파일에서 <persistence-unit name="hello"> 유닛명이 hello기 때문에 아래 코드도 hello
          */
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
@@ -26,19 +27,21 @@ public class JpaMain {
         // begin()을 통해 데이터베이스 트랜잭션을 시작한다.
         entityTransaction.begin();
         try {
-            Member findMember = entityManager.find(Member.class, 1L);
-            // entityManager.persist(member); helloMember // 데이터 insert
-            findMember.setName("HelloChanged");
-            // entityManager.remove(findMember); // 데이터 delete
-            System.out.println("findMember ID = " + findMember.getId());
-            System.out.println("findMember Name= " + findMember.getName());
+            // jpql 간단 예시 -> 엔티티 객체를 대상으로 쿼리 (객체 지향 쿼리)
+            List<Member> memberList = entityManager.createQuery("select m from Member as m", Member.class)
+                    .setFirstResult(1)
+                    .setMaxResults(10) // from member member0_ limit ? offset ? 페이징 처리도 편해진다.
+                    .getResultList();
+            for (Member member: memberList) {
+                System.out.println("member Name = " + member.getName());
+            }
             // 정상적일 경우 commit
             entityTransaction.commit();
         } catch (Exception e) {
             // 문제가 있으면 rollback
             entityTransaction.rollback();
         } finally {
-            // entityManager가 DB 커넥션을 잡고 있기 때문에 끊어줘야함.
+            // !중요! entityManager가 DB 커넥션을 잡고 있기 때문에 반드시 자원 반환을 해줘야한다.
             entityManager.close();
         }
         emf.close();
