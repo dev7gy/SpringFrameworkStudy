@@ -21,16 +21,20 @@ public class JpaMain {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         // begin()을 통해 데이터베이스 트랜잭션을 시작한다.
         entityTransaction.begin();
-        
-        // jpa를 직접 동작시킬 코드 위치
-        Member member = new Member();
-        member.setId(1L);
-        member.setName("helloMember");
-        entityManager.persist(member);
-
-        entityTransaction.commit();
-        entityManager.close();
-
+        try {
+            Member member = new Member();
+            member.setId(1L);
+            member.setName("helloMember");
+            entityManager.persist(member);
+            // 정상적일 경우 commit
+            entityTransaction.commit();
+        } catch (Exception e) {
+            // 문제가 있으면 rollback
+            entityTransaction.rollback();
+        } finally {
+            // entityManager가 DB 커넥션을 잡고 있기 때문에 끊어줘야함.
+            entityManager.close();
+        }
         emf.close();
     }
 }

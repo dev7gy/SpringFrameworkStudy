@@ -14,7 +14,9 @@
 
             <!-- 옵션 -->
             <property name="hibernate.show_sql" value="true"/>
+            <!-- 쿼리 출력을 예쁘게 -->
             <property name="hibernate.format_sql" value="true"/>
+            <!-- 쿼리에 주석이 찍히게 하는 법 -->
             <property name="hibernate.use_sql_comments" value="true"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
         </properties>
