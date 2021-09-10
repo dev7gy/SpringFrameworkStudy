@@ -51,4 +51,21 @@
 - 객체와 관계형 데이터베이스 매핑하기 -> 정적인 개념
 - 영속성 컨텍스트 -> 내부 동작
 
-## 4. 영속성 컨텍스트
+## 4. 영속성 컨텍스트(Persistence Context)
+- 엔티티를 영구 저장하는 환경
+- 논리적인 개념
+```
+EntityManager.persist(entity); 를 앞에서는 데이터베이스에 entity를 저장한다고 배웠지만, 실제로는 entity를 영속성 컨텍스트에 저장하는 것이다.
+```
+
+### 4-a. Entity의 생명 주기
+- 비영속(new/transient) 
+- 영속(managed)
+- 준영속(detached)
+- 삭제(removed)
+```
+Member member = new Member();
+entityManger.persist(member);
+entityManager.detach(member);
+entityManger.remove(member)
+```
