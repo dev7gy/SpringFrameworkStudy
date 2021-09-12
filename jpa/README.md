@@ -65,7 +65,7 @@ EntityManager.persist(entity); 를 앞에서는 데이터베이스에 entity를 
 - 삭제(removed)
 ```
 Member member = new Member();
-entityManger.persist(member);
+entityManager.persist(member);
 entityManager.detach(member);
-entityManger.remove(member)
+entityManager.remove(member);
 ```
