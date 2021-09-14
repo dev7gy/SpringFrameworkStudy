@@ -69,3 +69,32 @@ entityManager.persist(member);
 entityManager.detach(member);
 entityManager.remove(member);
 ```
+
+## 4-b. 1차 캐시, 쓰기 지연 SQL 저장소
+- 영속성 컨텍스트에는 내부에 1차 캐시가 아래와 같은 구조로 존재한다.
+- 여러 사용자가 공유하는 캐시가 아니다. 트랜잭션 내부에서만 공유되는 캐시이다.
+```
+Member member = new Member();
+member.setId("member1");
+member.setUsername("이름");
+
+/* 
+    1차 캐시에 저장 
+    쓰기 지연 SQL 저장소에 insert SQL문을 저장
+*/
+entityManager.persist(member);
+
+// 1차 캐시에서 조회
+Member findMember1 = em.find(Member.class, "member1");
+Member findMember2 = em.find(Member.class, "member1");
+
+// 실제 쿼리문 전달.
+entityTransaction.commit();
+
+/* findMember1 == findMember2
+ 1차 캐시로 Repeatable Read 등급의 트랜잭션 격리 수준을 데이터베이스가 아닌 애플리케이션 차원에서 제공한다.
+*/
+```
+|@id|Entity|
+|---|------|
+|member1|member(개체)|
