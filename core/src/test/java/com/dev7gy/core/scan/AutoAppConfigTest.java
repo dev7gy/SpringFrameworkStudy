@@ -1,5 +1,6 @@
-package com.dev7gy.core;
+package com.dev7gy.core.scan;
 
+import com.dev7gy.core.AutoAppConfig;
 import com.dev7gy.core.member.Member;
 import com.dev7gy.core.member.service.MemberService;
 import org.junit.jupiter.api.Test;

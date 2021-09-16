@@ -30,3 +30,22 @@ MemberRepository mR = new JdbcMemberRepository();
 ```
 역할에 의존하게 해야 한다
 ```
+## SpringContainer
+### 스프링 빈 저장소
+|빈 이름|빈 객체|
+|------|------|
+|memberServiceImpl|memberServiceImpl@x01|
+
+## 주요 어노테이션
+- @Bean
+- @ComponentScan
+   - 탐색 위치를 basePakcages= "com.dev7gy.core" 와 같이 지정해줄 수 있다.
+   - 지정하지 않으면, @ComponentScan이 붙은 설정 정보 클래스의 패키지가 시작 위치가 된다.
+   - @SpringBootApplication 안에도 @ComponentScan이 있다. -> Annotation에는 상속 관계가 없음, 특정 Annotation을 내부적으로 가지고 있는 것은 Spring의 기능
+   - 컴포넌트 스캔 기본 대상
+    - @Component
+    - @Controller
+    - @Service
+    - @Repository
+    - @Configuration
+- @AutoWired
