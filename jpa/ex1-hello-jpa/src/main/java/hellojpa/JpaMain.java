@@ -27,31 +27,11 @@ public class JpaMain {
         // begin()을 통해 데이터베이스 트랜잭션을 시작한다.
         entityTransaction.begin();
         try {
-            // jpql 간단 예시 -> 엔티티 객체를 대상으로 쿼리 (객체 지향 쿼리)
-            List<Member> memberList = entityManager.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(10) // from member member0_ limit ? offset ? 페이징 처리도 편해진다.
-                    .getResultList();
-            for (Member member: memberList) {
-                System.out.println("member Name = " + member.getName());
-            }
-            // 정상적일 경우 commit
-            entityTransaction.commit();
-            /**
-             * 영속성 컨텍스트의 이점
-             *  1차 캐시, 동일성 보장, 트랜잭션을 지원하는 쓰기 지연, 변경 감지, 지연 로딩
-             *  영속 컨텍스트 내부에 1차 캐시가 존재한다.
-             - 비영속 상태
-             Member member = new Member();
-             member.setId(1L);
-             member.setName("hello");
-
-             - 영속 상태
-             entityManager.persist(member);
-
-             - 비영속 상태
-             - entityManager.detach(member);
-             */
+            Member member = entityManager.find(Member.class, 1L);
+            member.setName("new Name"); // 값만 바꿨는데 update 쿼리가 commit()때 나가게 된다.
+            entityManager.flush(); // 강제 flush
+            System.out.println("-------");
+            entityTransaction.commit(); // 자동 flush
 
         } catch (Exception e) {
             // 문제가 있으면 rollback

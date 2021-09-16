@@ -72,10 +72,12 @@ entityManager.remove(member);
 
 ## 4-b. 1차 캐시, 쓰기 지연 SQL 저장소
 - 영속성 컨텍스트에는 내부에 1차 캐시가 아래와 같은 구조로 존재한다.
-- 여러 사용자가 공유하는 캐시가 아니다. 트랜잭션 내부에서만 공유되는 캐시이다.
+- 1차 캐시는 여러 사용자가 공유하는 캐시가 아니다. 트랜잭션 내부에서만 공유되는 캐시이다.
+- 변경 감지시 1차 캐시의 스냅샷데이터와 Entity 데이터를 비교한 다음 변경사항이 발견되면 Update 쿼리를 쓰기 지연 SQL 저장소에 저장 후 commit()함수가 실행될 때 실제 쿼리를 DBMS에 날린다.
+
 ```
 Member member = new Member();
-member.setId("member1");
+member.setId("m1");
 member.setUsername("이름");
 
 /* 
@@ -85,8 +87,8 @@ member.setUsername("이름");
 entityManager.persist(member);
 
 // 1차 캐시에서 조회
-Member findMember1 = em.find(Member.class, "member1");
-Member findMember2 = em.find(Member.class, "member1");
+Member findMember1 = em.find(Member.class, "m1");
+Member findMember2 = em.find(Member.class, "m1");
 
 // 실제 쿼리문 전달.
 entityTransaction.commit();
@@ -95,6 +97,24 @@ entityTransaction.commit();
  1차 캐시로 Repeatable Read 등급의 트랜잭션 격리 수준을 데이터베이스가 아닌 애플리케이션 차원에서 제공한다.
 */
 ```
-|@id|Entity|
-|---|------|
-|member1|member(개체)|
+|@id|Entity|스냅샷|
+|---|------|------|
+|m1|member(개체)|member개체 스냅샷|
+
+## 4-c. 플러시
+- 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영
+- 플리시를 해도 1차 캐시 데이터는 유지된다. 영속성 컨텍스트를 비우는게 아니라 변경된 내용을 데이터베이스에 동기화하는 것이다.
+- 플러시가 발생하면 "변경감지"-"수정된 엔티티에 대한 쿼리문이 쓰기 지연 SQL 저장소에 등록"-"쓰기 지연 SQL 저장소에 있는 쿼리문을 DB로 전송"
+- 영속성 컨텍스를 플러시하는 방법
+    - entityManger.flush(); 직접 호출
+    - entityTransaction.commit(); 플러시 자동 호출
+    - JPQL 쿼리 실행; 플러시 자동 호출 
+- 플러시 모드 옵션 entityManager.setFlushMode(모드);
+    - FlushModeType.AUTO: 커밋이나 쿼리를 실행할 때 플러시
+    - FlushModeType.COMMIT: 커밋할 때만 플러시
+
+## 4-d. 준영속 상태
+- 준영속 상태로 만드는 방법
+    - 특정 엔티티만 준영속 상태로 전환: entityManager.detach(개체);
+    - 영속성 컨텍스트를 완전 초기화: entityManger.clear();
+    - 영속성 컨텍스트를 종료: entityManager.close();
