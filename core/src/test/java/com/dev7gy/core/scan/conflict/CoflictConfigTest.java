@@ -18,6 +18,9 @@ public class CoflictConfigTest {
                 UnsatisfiedDependencyException.class,
                 () -> new AnnotationConfigApplicationContext(AutoConflictAppConfig.class)
         );
+        /**
+         * 충돌나는 ConflictBeanB 삭제 해당 Test는 실패함.
+         */
     }
 
     @Test
