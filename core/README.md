@@ -49,3 +49,33 @@ MemberRepository mR = new JdbcMemberRepository();
     - @Repository
     - @Configuration
 - @AutoWired
+
+## 다양한 의존관계 주입 방법
+- 생성자 주입: 불변, 필수 의존관계에서 주입, 스프링 빈에 대해서 생성자가 딱 1개만 있으면, @Autowired를 생략해도 자동 주입이 된다.
+- 수정자(setter) 주입: 선택, 변경 가능성이 있는 의존관계에서 사용
+```
+추가 공부항목: 자바빈 프로퍼티 규약
+```
+- 필드 주입: 필드에 바로 주입, 특별한 경우가 아니면 사용하지 말자.
+- 일반 매서드 주입: 일반 매서드를 통해서 주입, 일반적으로 잘 사용하지 않음.
+
+## 의존관계 주입 옵션 처리
+- 사전 조건: TestBean은 스프링 빈이 아님.
+- 자동 주입할 대상이 없으면 수정자 매서드 자체를 호출하지 않는 경우
+```
+@Autowired(required = false)
+public void setNoBean(TestBean tb) {
+}
+```
+- 자동 주입할 대상이 없을때 null이 입력되는 경우
+```
+@Autowired
+public void setNoBean(@Nullable TestBean tb) {
+}
+```
+- 자동 주입할 대상이 없으면 Optional.empty가 입력되는 경우
+```
+@Autowired(required = false)
+public void setNoBean(Optinal<TestBean> tb) {
+}
+```

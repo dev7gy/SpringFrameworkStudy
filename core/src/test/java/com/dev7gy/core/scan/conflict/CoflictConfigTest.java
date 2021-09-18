@@ -14,13 +14,13 @@ public class CoflictConfigTest {
     @Test
     void conflictConfig() {
         // No qualifying bean of type 'com.dev7gy.core.scan.conflict.ConflictBean' available: expected single matching bean but found 2: conflictBeanA,conflictBeanB
+        /**
+         * 충돌나는 ConflictBeanB 삭제 해당 Test는 실패함.
+         */
         Assertions.assertThrows(
                 UnsatisfiedDependencyException.class,
                 () -> new AnnotationConfigApplicationContext(AutoConflictAppConfig.class)
         );
-        /**
-         * 충돌나는 ConflictBeanB 삭제 해당 Test는 실패함.
-         */
     }
 
     @Test
