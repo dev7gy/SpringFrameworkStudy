@@ -25,7 +25,8 @@ public class qCoflictConfigTest {
         assertThat(conflictBeanA).isInstanceOf(ConflictBeanA.class);
         assertThat(conflictBeanB).isInstanceOf(ConflictBeanB.class);
         ConflictService conflictService = ac.getBean("conflictService", ConflictService.class);
-        assertThat(conflictService.conflictBean).isEqualTo(conflictBeanA);
+        assertThat(conflictService.conflictBean).isEqualTo(conflictBeanB);
     }
+
 }
 
