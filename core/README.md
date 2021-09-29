@@ -110,3 +110,14 @@
     public void setNoBean(Optinal<TestBean> tb) {
     }
     ```
+## 의존관계 주입시 충돌 나는 경우 해결법
+- @Configuraion에 직접 넣어줄 Bean 직접 정의
+- @Qualifire 사용해서 별칭 달아주기 -> Annotaion 직접 만들어서 적용하기
+- @Primary 사용하기  
+- 충돌나는 Bean을 여러개 주입 받는 방법, Map<key, 충돌Bean.class>, List<충돌Bean.class> 로 주입한 다음에 key값에 따라 동작할 수 있게 구성
+
+## 스프링 컨테이서 생성하면서 스프링 빈 등록하기
+```
+스프링 컨테이너를 생성하면서 Bean 2개를 등록한다.
+new AnnotationConfigApplicationContext(스프링Bean1.class, 스프링Bean2.class);
+```
