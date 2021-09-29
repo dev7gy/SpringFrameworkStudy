@@ -1,10 +1,14 @@
-package com.dev7gy.core.scan.conflict;
+package com.dev7gy.coreConflict.basic;
 
+import com.dev7gy.coreConflict.ConflictBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.UnsatisfiedDependencyException;
 import org.springframework.context.annotation.*;
 
+/*
+ Bean 조회시 일부러 충돌을 내서 해결 방법 연습.
+ */
 public class CoflictConfigTest {
     @Configuration
     @ComponentScan(
@@ -17,7 +21,7 @@ public class CoflictConfigTest {
 
     @Test
     void conflictConfig() {
-        // No qualifying bean of type 'com.dev7gy.core.scan.conflict.ConflictBean' available: expected single matching bean but found 2: conflictBeanA,conflictBeanB
+        // No qualifying bean of type 'com.dev7gy.coreConflict.basic.ConflictBean' available: expected single matching bean but found 2: conflictBeanA,conflictBeanB
         /**
          * 다른 테스트를 위해 충돌나는 ConflictBeanB 클래스 @Component 어노테이션 주석처리
          // ApplicationContext ac = new AnnotationConfigApplicationContext(AutoConflictAppConfig.class);
@@ -59,3 +63,4 @@ public class CoflictConfigTest {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ManualConfig.class);
     }
 }
+
