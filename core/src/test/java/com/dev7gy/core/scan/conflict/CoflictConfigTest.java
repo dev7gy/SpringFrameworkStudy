@@ -21,6 +21,7 @@ public class CoflictConfigTest {
         /**
          * 다른 테스트를 위해 충돌나는 ConflictBeanB 클래스 @Component 어노테이션 주석처리
          // ApplicationContext ac = new AnnotationConfigApplicationContext(AutoConflictAppConfig.class);
+         // ConflictBeanB에서 @Component 주석 없애고 테스트 필요
          */
         Assertions.assertThrows(
                 UnsatisfiedDependencyException.class,

@@ -3,6 +3,7 @@ package com.dev7gy.core;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.stereotype.Component;
 
 @Configuration
 /**
@@ -11,9 +12,11 @@ import org.springframework.context.annotation.FilterType;
  * Name = appConfigObject = com.dev7gy.core.AppConfig$$EnhancerBySpringCGLIB$$6901db8d@4f5b08d
  */
 @ComponentScan(
-        excludeFilters = @ComponentScan.Filter(
-                type = FilterType.ANNOTATION,
-                classes = Configuration.class)
+        excludeFilters = {
+                @ComponentScan.Filter(
+                        type = FilterType.ANNOTATION,
+                        classes = Configuration.class),
+        }
 )
 public class AutoAppConfig {
 }
