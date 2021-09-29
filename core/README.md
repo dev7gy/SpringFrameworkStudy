@@ -121,3 +121,6 @@
 스프링 컨테이너를 생성하면서 Bean 2개를 등록한다.
 new AnnotationConfigApplicationContext(스프링Bean1.class, 스프링Bean2.class);
 ```
+
+## 언제 수동 Bean 등록을 사용해야 할까?
+- 직접 만든 기술 Ligic Bean(AOP), 다형성을 적극 활용하는 Bean일 경우  
