@@ -134,6 +134,10 @@ new AnnotationConfigApplicationContext(스프링Bean1.class, 스프링Bean2.clas
         ```
     - 2. 설정 정보에 초기화 메서드, 종료 매서드 지정
         ```
+      /*
+      !추가 공부 필요!종료 메서드 추론
+      @Bean의 destroyMethod 속성에는 아주 특별한 기능
+      */
       // NerworkClient.java
       public class NetworkClient {
         public void init() {}
