@@ -7,7 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
  * 실제 네트워크 연결이 아닌 네트워크 연결 시나리오용 예제
  * 핵심은 해당 예제를 통해 Spring Bean 생명주기 콜백을 파악하는 것
  */
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient {
     private String url;
 
     public NetworkClient() {
@@ -18,14 +18,17 @@ public class NetworkClient implements InitializingBean, DisposableBean {
          */
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    /**
+     * init()함수와 close()함수를 @Configuration에 @Bean등록시 명시함.
+     */
+    public void init() {
+        System.out.println("NetworkClient.init()");
         connect();
-        call("Init Connect Call");
+        call("Connect Init");
     }
 
-    @Override
-    public void destroy() throws Exception {
+    public void close() {
+        System.out.println("NetworkClient.close()");
         disconnect();
     }
 

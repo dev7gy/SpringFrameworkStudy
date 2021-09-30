@@ -133,4 +133,17 @@ new AnnotationConfigApplicationContext(스프링Bean1.class, 스프링Bean2.clas
       public class NetworkClient implements InitializingBean, DisposableBean
         ```
     - 2. 설정 정보에 초기화 메서드, 종료 매서드 지정
+        ```
+      // NerworkClient.java
+      public class NetworkClient {
+        public void init() {}
+        public void close() {}
+      }
+      
+      // Configuration.java
+      static class LifeCycleConfig {
+        @Bean(initMethod = "init", destroyMethod = "close")
+        public NetworkClient networkClient() { return }
+      }
+        ```
     - 3. @PostConstructor, @PreDestroy 어노테이션 지정
