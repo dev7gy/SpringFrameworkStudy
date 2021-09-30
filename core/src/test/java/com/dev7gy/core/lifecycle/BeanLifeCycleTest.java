@@ -37,7 +37,11 @@ public class BeanLifeCycleTest {
     @Configuration
     static class LifeCycleConfig {
 
-        @Bean(initMethod = "init", destroyMethod = "close")
+        /*
+        @PostConstructor, @PreDestroy를 사용하면 직접 지정해줄 필요 없음
+        -> 외부 라이브러리 사용시엔 @Bean(initMethod = "init", destroyMethod = "close") 방법을 사용하자
+         */
+        @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://dev7gy.spring.practice");

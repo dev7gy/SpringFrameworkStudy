@@ -3,6 +3,9 @@ package com.dev7gy.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 /**
  * 실제 네트워크 연결이 아닌 네트워크 연결 시나리오용 예제
  * 핵심은 해당 예제를 통해 Spring Bean 생명주기 콜백을 파악하는 것
@@ -20,13 +23,16 @@ public class NetworkClient {
 
     /**
      * init()함수와 close()함수를 @Configuration에 @Bean등록시 명시함.
+     * 아니면 @PostConstructor, @PreDestroy를 사용
      */
+    @PostConstruct
     public void init() {
         System.out.println("NetworkClient.init()");
         connect();
         call("Connect Init");
     }
 
+    @PreDestroy
     public void close() {
         System.out.println("NetworkClient.close()");
         disconnect();
