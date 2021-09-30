@@ -1,16 +1,32 @@
 package com.dev7gy.core.lifecycle;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 /**
  * 실제 네트워크 연결이 아닌 네트워크 연결 시나리오용 예제
  * 핵심은 해당 예제를 통해 Spring Bean 생명주기 콜백을 파악하는 것
  */
-public class NetworkClient {
+public class NetworkClient implements InitializingBean, DisposableBean {
     private String url;
 
     public NetworkClient() {
         System.out.println("Constructor, url = " + url);
+        /* 대개 실제 Connect는 오래 걸리는 작업이므로 객체 생성과 작업을 분리하는 것이 좋다.
         connect();
         call("Init Connect Call");
+         */
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        connect();
+        call("Init Connect Call");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        disconnect();
     }
 
     public void setUrl(String url) {

@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  *  1. 인터페이스(InitializingBean, DisposableBean)
  *  2. 설정 정보에 초기화 메서드, 종료 매서드 지정
  *  3. @PostConstructor, @PreDestroy 어노테이션 지정
- *  
+ *
  * !중요! 객체의 생성과 초기화(무거운 작업일 경우)를 분리하자
  * <Spring Bean Event Life Cycle>
  *     - Single Tone
