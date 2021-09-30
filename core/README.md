@@ -128,5 +128,9 @@ new AnnotationConfigApplicationContext(스프링Bean1.class, 스프링Bean2.clas
 ## Bean LifeCycle CallBack
 - 스프링에서는 App 시작 시점에 필요한 연결을 미리 해두고, App 종료 시점에 연결을 종료하는 작업을 하려고 한다면, 객체의 초기화와 종료작업을 어떻게 진행할 것인가.
     - 1. 인터페이스(InitializingBean, DisposableBean)
+        ```
+      // 단점 Spring 전용 Interface에 의존하게 됨. - 거의 사용하지 않음.
+      public class NetworkClient implements InitializingBean, DisposableBean
+        ```
     - 2. 설정 정보에 초기화 메서드, 종료 매서드 지정
     - 3. @PostConstructor, @PreDestroy 어노테이션 지정
