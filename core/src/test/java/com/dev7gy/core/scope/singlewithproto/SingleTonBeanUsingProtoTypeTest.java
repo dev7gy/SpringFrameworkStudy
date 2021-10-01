@@ -1,4 +1,4 @@
-package com.dev7gy.core.scope;
+package com.dev7gy.core.scope.singlewithproto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
