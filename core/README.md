@@ -90,7 +90,7 @@
 - 필드 주입: 필드에 바로 주입, 특별한 경우가 아니면 사용하지 말자.
 - 일반 매서드 주입: 일반 매서드를 통해서 주입, 일반적으로 잘 사용하지 않음.
 
-## 의존관계 주입 옵션 처리
+### 의존관계 주입 옵션 처리
 - 사전 조건: TestBean은 스프링 빈이 아님.
 - 자동 주입할 대상이 없으면 수정자 매서드 자체를 호출하지 않는 경우
     ```
@@ -110,19 +110,19 @@
     public void setNoBean(Optinal<TestBean> tb) {
     }
     ```
-## 의존관계 주입시 충돌 나는 경우 해결법
+### 의존관계 주입시 충돌 나는 경우 해결법
 - @Configuraion에 직접 넣어줄 Bean 직접 정의
 - @Qualifire 사용해서 별칭 달아주기 -> Annotaion 직접 만들어서 적용하기
 - @Primary 사용하기  
 - 충돌나는 Bean을 여러개 주입 받는 방법, Map<key, 충돌Bean.class>, List<충돌Bean.class> 로 주입한 다음에 key값에 따라 동작할 수 있게 구성
 
-## 스프링 컨테이서 생성하면서 스프링 빈 등록하기
+#### 스프링 컨테이서 생성하면서 스프링 빈 등록하기
 ```
 스프링 컨테이너를 생성하면서 Bean 2개를 등록한다.
 new AnnotationConfigApplicationContext(스프링Bean1.class, 스프링Bean2.class);
 ```
 
-## 언제 수동 Bean 등록을 사용해야 할까?
+#### 언제 수동 Bean 등록을 사용해야 할까?
 - 직접 만든 기술 Ligic Bean(AOP), 다형성을 적극 활용하는 Bean일 경우
 
 ## Bean LifeCycle CallBack
@@ -151,3 +151,26 @@ new AnnotationConfigApplicationContext(스프링Bean1.class, 스프링Bean2.clas
       }
         ```
     - 3. @PostConstructor, @PreDestroy 어노테이션 지정
+
+## Bean Scope
+- Single Tone: 기본 Scope, Spring Container의 시작과 종료까지 유지
+- Proto Type: Spring Container는 프로토타입 Bean의 생성과 의존관계 주입까지만 관여, 더는 관리하지 않는 매우 짧은 범위의 Scope
+- Web Type: 
+    - request: Web 요청이 들어오고 나갈때 까지 유지되는 Scope
+    - session: Web Session이 생성되고 종료될 때까지 유지되는 Scope
+    - application: Web의 서블릿 컨텍스트와 같은 범위로 유지되는 Scope
+ ```
+// 컴포넌트 스캔 이용시
+@Scope("prototype")
+@Component
+public class ProtoBean {}
+
+// 수동 등록 
+@Scope("prototype")
+@Bean
+ProtoBean registerProtoBean() {
+    return new ProtoBean();
+}
+```
+
+
