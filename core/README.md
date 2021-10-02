@@ -172,5 +172,26 @@ ProtoBean registerProtoBean() {
     return new ProtoBean();
 }
 ```
-
-
+### proto type 사용 방법
+- Spring Bean 내부에 스프링 컨테이너를 두고 요청하는 방법
+- Provider를 사용하는 것.
+    - ObjectFactory, ObjectProvider
+        ```
+      public class SingletonBean {
+        @Autowired
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        public int logic() {
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            }
+      }
+        ```
+    - JSR-330 Provider
+        ```
+      public class SingletonBean {
+        @Autowired
+        private Provider<PrototypeBean> provider;
+        public int logic() {
+            PrototypeBean prototypeBean = provider.get()
+            }
+      }
+        ```
