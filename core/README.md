@@ -203,7 +203,8 @@ ProtoBean registerProtoBean() {
     - application
     - websocket
     
-### Web Scope를 주입해서 사용하기
+### Web Scope를 주입해서 사용하기(!가짜로 버티기!)
+- !핵심! 요청이 와야 생성되는 Bean에 대해서 실제 사용시점까지 어떻게 지연시킬 것인가!! 
 - ObjectProvider를 이용하여 request Scope 빈의 생성을 지연하기
 ```
 !중요! controller와 service 모두 동일한 request에 대해서는 같은 CustomLogger Bean을 사용한다.
@@ -214,4 +215,13 @@ private final ObjectProvider<CustomLogger> customLoggerProvider;
 @Component
 @Scope(value = "request")
 public class CustomLogger {}
+```
+- proxy를 이용하는 방식
+    - proxy: 서버와 클라이언트 사이에 중계기로서 대리로 통신을 수행하는 것.
+    - 가짜 proxy 객체를 만들어서 SingleTon처럼 주입을 해준 뒤, 실제 요청이 오면 proxy 객체가 실제 Bean을 요청한다.
+    - !중요! SingleTon처럼 보이기 때문에 주의해서 사용해야 함.
+```
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class CustomLogger { }
 ```
