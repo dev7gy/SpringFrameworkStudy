@@ -1,6 +1,7 @@
 package com.dev7gy.core.webscope;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class LogCheckController {
     private final LogCheckService logCheckService;
-    private final CustomLogger customLogger;
+    private final ObjectProvider<CustomLogger> customLoggerProvider;
 
     @RequestMapping("log-check")
     @ResponseBody
     public String logCheck(HttpServletRequest request) {
         String requestURL = request.getRequestURL().toString();
+        CustomLogger customLogger = customLoggerProvider.getObject();
         customLogger.setRequestURL(requestURL);
 
         customLogger.log("controller check");

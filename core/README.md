@@ -202,3 +202,16 @@ ProtoBean registerProtoBean() {
     - session
     - application
     - websocket
+    
+### Web Scope를 주입해서 사용하기
+- ObjectProvider를 이용하여 request Scope 빈의 생성을 지연하기
+```
+!중요! controller와 service 모두 동일한 request에 대해서는 같은 CustomLogger Bean을 사용한다.
+public class LogCheckController {
+private final ObjectProvider<CustomLogger> customLoggerProvider;
+}
+
+@Component
+@Scope(value = "request")
+public class CustomLogger {}
+```
