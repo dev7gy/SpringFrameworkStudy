@@ -195,3 +195,10 @@ ProtoBean registerProtoBean() {
             }
       }
         ```
+### Web Scope
+- 웹 환경에서만 동작, 해당 scope 종료시점까지 관리 대상
+- 종류
+    - request
+    - session
+    - application
+    - websocket
