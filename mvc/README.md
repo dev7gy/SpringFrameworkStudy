@@ -1,4 +1,4 @@
-# [Spring MVC](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1/dashboard)
+# [Spring MVC](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1/dashboard)/[private_practice](https://github.com/dev7gy/SpringMVC.git)
 # Web 기본 개념
 ### Web Server
 - HTTP 기반으로 동작, 정적 리소스 제공
