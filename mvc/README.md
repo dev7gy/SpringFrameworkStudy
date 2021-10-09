@@ -71,3 +71,12 @@
     - body
 - 임시 저장소 기능
 - 세션 관리 기능
+
+### Http 요청 데이터
+- GET - 쿼리 파라미터
+- POST - HTML FORM
+	- content-type: application/x-www-form-urlencoded
+- HTTP message body
+	- content-type: json, xml, text
+
+
