@@ -73,10 +73,10 @@
 - 세션 관리 기능
 
 ### Http 요청 데이터
-- GET - 쿼리 파라미터
+- GET - 쿼리 파라미터: Client에서 Server로 데이터를 전달할 때는 HTTP 메시지 바디를 사용하지 않기 때문에 content-type이 없음.
 - POST - HTML FORM
 	- content-type: application/x-www-form-urlencoded
 - HTTP message body
-	- content-type: json, xml, text
+	- content-type: json, xml, plain/text
 
 
