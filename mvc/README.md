@@ -78,5 +78,21 @@
 	- content-type: application/x-www-form-urlencoded
 - HTTP message body
 	- content-type: json, xml, plain/text
+	- json을 객체로 바꿔주기 위해서는 ObjectMapper 클래스가 필요
+		```
+		// SpringBoot는 기본적으로 jackson을 사용한다. gson도 따로 라이브러리 추가 후 사용 가능
+		import com.fasterxml.jackson.databind.ObjectMapper;
 
+		private ObjectMapper objectMapper = new ObjectMapper();
+		
+		@Override
+		protected void service(HttpServletRequest request, HttpServletResponse response) {
+			ServletInputStream inputStream = request.getInputStream();
+			String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+		
+			MyData = data1 = objectMapper.readValue(messageBody, MyData.class);
+		}
+		```
+
+### 
 
