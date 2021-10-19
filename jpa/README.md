@@ -59,10 +59,10 @@ EntityManager.persist(entity); 를 앞에서는 데이터베이스에 entity를 
 ```
 
 ### 4-a. Entity의 생명 주기
-- 비영속(new/transient) 
-- 영속(managed)
-- 준영속(detached)
-- 삭제(removed)
+- 비영속(new/transient): 영속성 컨텍스트와 전혀 관계가 없는 새로운 상태
+- 영속(managed): 영속성 컨텍스트에 관리되는 상태
+- 준영속(detached): 영속성 컨텍스트에 저장되었다가 분리된 상태
+- 삭제(removed): 객체를 삭제
 ```
 Member member = new Member();
 entityManager.persist(member);
