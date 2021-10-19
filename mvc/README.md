@@ -64,6 +64,9 @@
 - log 남기기 tip: logging.level.org.apache.coyote.http11=debug
 - index.html 위치: main/webapp/index.html
 
+## !중요! HTTP 스펙이 제공하는 요청, 응답 메시지 자체를 이해해야 함
+- HttpServletRequest과 HttpServletResponse는 HTTP 요청메시지, HTTP 응답 메시지를 편리하게 사용하도록 도와주는 객체일 뿐이다.
+
 ### HttpServletRequest
 - Http요청 메시지
     - start line
@@ -74,8 +77,10 @@
 
 ### Http 요청 데이터
 - GET - 쿼리 파라미터: Client에서 Server로 데이터를 전달할 때는 HTTP 메시지 바디를 사용하지 않기 때문에 content-type이 없음.
+
 - POST - HTML FORM
 	- content-type: application/x-www-form-urlencoded
+
 - HTTP message body
 	- content-type: json, xml, plain/text
 	- json을 객체로 바꿔주기 위해서는 ObjectMapper 클래스가 필요
@@ -90,9 +95,47 @@
 			ServletInputStream inputStream = request.getInputStream();
 			String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 		
+
 			MyData = data1 = objectMapper.readValue(messageBody, MyData.class);
 		}
 		```
 
-### 
+### HttpServletResponse
+- Http응답 메시지
+    - Http 응답코드 지정
+    - 헤더 생성
+    - 바디 생성
+- Content-Type
+- 쿠키
+- Redirect 지원
+
+### Http 응답 데이터
+- Text 전송(text/plain)
+```
+response.setContentType("text/plain");
+response.setCharacterEncoding("utf-8");
+```
+- HTML 전송(text/html)
+```
+response.setContentType("text/html");
+response.setCharacterEncoding("utf-8");
+```
+- Data 전송(application/json)
+```
+response.setHeader("Content-Type", "application/json");
+// "application/json"은 기본적으로 utf-8
+```
+
+## Servlet -> JSP -> MVC
+- Servlet: java에 html을 넣어줌
+- JSP: html에 java를 넣어줌.
+- MVC - Model, View, Controller 
+    - View와 로직부분은 변경 라이프 사이클이 다르다.
+    - 요청 -> Controller -> 서비스 -(모델)-> View -> 응답
+    - 서블릿을 Controller로 JSP를 View로 이용, Model은 HttpServletRequest객체의 내부 저장소를 사용한다.
+    ```
+    WEB-INF/views/members.jsp
+     jsp의 taglib 기능 사용 <c:forEach>를 사용하기 위함
+    ```
+### MVC패턴 - 한계
 
