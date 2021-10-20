@@ -138,4 +138,22 @@ response.setHeader("Content-Type", "application/json");
      jsp의 taglib 기능 사용 <c:forEach>를 사용하기 위함
     ```
 ### MVC패턴 - 한계
+- 아직도 반복되는 코드가 존재한다.
+- 사용 안 하는데 작성해야 하는 코드가 있다.(response)
+```
+dispatcher.forward(request, response)
+```
+- front Controller 패턴을 사용해서 해결해보자! 
 
+### MVC - Front Controller
+- Front Controller 서블릿 하나로 클라이언트의 요청을 받음
+- Front Controller가 요청에 맞는 컨트롤러를 찾아서 호출
+- request요청을 받는 곳은 Front Controller 하나로 받는다.
+- 공통 처리 가능
+- Front Controller를 제외한 나머지 컨트롤러는 서블릿을 사용하지 않아도 됨
+
+- V1
+```
+장점: 서블릿 하나로 받기, 나머지 컨트롤러 서블릿 사용하지 않게 하기
+단점: 모든 컨트롤러에 뷰로 이동하는 부분이 중복된다.
+```
